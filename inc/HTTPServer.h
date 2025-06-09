@@ -14,6 +14,7 @@
 #pragma once
 
 #include <list>
+#include <string>
 
 // hacking private members RTSPServer::fWeServeSRTP & RTSPServer::fWeEncryptSRTP
 #define private protected

@@ -21,6 +21,7 @@
 #include "UnicastServerMediaSubsession.h"
 #include "MulticastServerMediaSubsession.h"
 #include "TSServerMediaSubsession.h"
+#include "V4l2Output.h"
 
 class V4l2RTSPServer {
     public:
