@@ -65,7 +65,7 @@ std::string getDeviceName(const std::string & devicePath)
 	return deviceName;
 }
 
-		
+
 // -----------------------------------------
 //    entry point
 // -----------------------------------------
@@ -113,7 +113,7 @@ int main(int argc, char** argv)
 	}
 
 	// decode parameters
-	int c = 0;     
+	int c = 0;
 	while ((c = getopt (argc, argv, "v::Q:O:b:" "I:P:p:m::u:M::ct:S::x:X" "R:U:" "rwBsf::F:W:H:G:" "A:C:a:" "Vh")) != -1)
 	{
 		switch (c)
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
 			case 'b':	webroot = optarg; break;
 			
 			// RTSP/RTP
-			case 'I':       ReceivingInterfaceAddr  = inet_addr(optarg); break;
+			case 'I':	ReceivingInterfaceAddr  = inet_addr(optarg); break;
 			case 'P':	rtspPort                = atoi(optarg); break;
 			case 'p':	rtspOverHTTPPort        = atoi(optarg); break;
 			case 'u':	url                     = optarg; break;
@@ -135,7 +135,7 @@ int main(int argc, char** argv)
 			case 'S':	hlsSegment              = optarg ? atoi(optarg) : defaultHlsSegment; break;
 #ifndef NO_OPENSSL
 			case 'x':	sslKeyCert              = optarg; break;
-			case 'X':	enableRTSPS             = true; break;			
+			case 'X':	enableRTSPS             = true; break;
 #endif
 
 			// users
@@ -151,19 +151,19 @@ int main(int argc, char** argv)
 			case 'F':	fps       = atoi(optarg); break;
 			case 'W':	width     = atoi(optarg); break;
 			case 'H':	height    = atoi(optarg); break;
-			case 'G':   sscanf(optarg,"%dx%dx%d", &width, &height, &fps); break;
+			case 'G':	sscanf(optarg,"%dx%dx%d", &width, &height, &fps); break;
 			
 			// ALSA
-#ifdef HAVE_ALSA	
+#ifdef HAVE_ALSA
 			case 'A':	audioFreq = atoi(optarg); break;
 			case 'C':	audioNbChannels = atoi(optarg); break;
 			case 'a':	audioFmt = V4l2RTSPServer::decodeAudioFormat(optarg); if (audioFmt != SND_PCM_FORMAT_UNKNOWN) {audioFmtList.push_back(audioFmt);} ; break;
-#endif			
+#endif
 			
 			// version
-			case 'V':	
+			case 'V':
 				std::cout << VERSION << std::endl;
-				exit(0);			
+				exit(0);
 			break;
 			
 			// help
@@ -191,7 +191,7 @@ int main(int argc, char** argv)
 				std::cout << "\t -c               : don't repeat config (default repeat config before IDR frame)"                                     << std::endl;
 				std::cout << "\t -t <timeout>     : RTCP expiration timeout in seconds (default " << timeout << ")"                                   << std::endl;
 				std::cout << "\t -S[<duration>]   : enable HLS & MPEG-DASH with segment duration  in seconds (default " << defaultHlsSegment << ")"   << std::endl;
-#ifndef NO_OPENSSL				
+#ifndef NO_OPENSSL
 				std::cout << "\t -x <sslkeycert>  : enable SRTP"                                                                                      << std::endl;
 				std::cout << "\t -X               : enable RTSPS"                                                                                     << std::endl;
 #endif
@@ -208,7 +208,7 @@ int main(int argc, char** argv)
 				std::cout << "\t -F <fps>         : V4L2 capture framerate (default "<< fps << ")"                                                    << std::endl;
 				std::cout << "\t -G <w>x<h>[x<f>] : V4L2 capture format (default "<< width << "x" << height << "x" << fps << ")"  << std::endl;
 				
-#ifdef HAVE_ALSA	
+#ifdef HAVE_ALSA
 				std::cout << "\t ALSA options"                                                                                                        << std::endl;
 				std::cout << "\t -A freq          : ALSA capture frequency and channel (default " << audioFreq << ")"                                 << std::endl;
 				std::cout << "\t -C channels      : ALSA capture channels (default " << audioNbChannels << ")"                                        << std::endl;
@@ -247,7 +247,7 @@ int main(int argc, char** argv)
 		audioFmtList.push_back(SND_PCM_FORMAT_S16_LE);
 		audioFmtList.push_back(SND_PCM_FORMAT_S16_BE);
 	}
-#endif	
+#endif
 	
 	// init logger
 	initLogger(verbose);
@@ -256,7 +256,7 @@ int main(int argc, char** argv)
 	
 	// create RTSP server
 	V4l2RTSPServer rtspServer(rtspPort, rtspOverHTTPPort, timeout, hlsSegment, userPasswordList, realm, webroot, sslKeyCert, enableRTSPS);
-	if (!rtspServer.available()) 
+	if (!rtspServer.available())
 	{
 		LOG(ERROR) << "Failed to create RTSP server: " << rtspServer.getResultMsg();
 	}
